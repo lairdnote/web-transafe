@@ -1,92 +1,48 @@
-import React from "react";
-import { Card } from 'flowbite-react'
-import TableComponent from '../components/TableComponent';
+import React, { useState } from "react";
+
+
 import MainLayout from '../components/MainLayout'
+
+import {  Textarea } from "flowbite-react";
+
+import * as OpenCC from 'opencc-js';
+
 function Welcome() {
+
+  const [inputValue, setInputValue] = useState("")
+  const [outputValue, setOutputValue] = useState("")
+  
+  const handleSubmmit = (event: any) => {
+    console.log(event.target.value)
+    setInputValue(event.target.value)
+  }
+
+  const handleSubmit1 = () => {
+    const converter = OpenCC.Converter({ from: 'cn', to: 'hk' });
+
+    setOutputValue(converter(inputValue))
+
+  }
+  const handleSubmit2 = () => {
+    const converter = OpenCC.Converter({ from: 'hk', to: 'cn' });
+    setOutputValue(converter(inputValue))
+
+  }
   return (
     <>
       <MainLayout>
-        <div className="mb-auto pt-10 justify-between flex flex-wrap  md:flex-wrap ... ">
+      <div className="bg-gray-800 m-4 dark:bg-gray-800  text-blue-50 mb-auto auto-cols-max h-4/6">
 
 
-          <Card href="#" className="bg-gradient-to-l  rotate-12 items-end " >
-            <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              步骤1
-            </h5>
-            <p className="font-normal text-gray-700 dark:text-gray-400 max-w-prose">
-              Hi. 我们是代售小额HDO， 3000美金以下
-            </p>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
+        <div className="flex-row mx-auto h-full">
 
-              交易方式：  使用USDT 到平台地址：
-
-            </p>
-            <p className="underline">0x3C4c444D98BDb92BC33666AA5FdA5a24E1171495
-
-            </p>
-          </Card>
-          <Card href="#" className="bg-gradient-to-r  rotate-6 items-end" >
-            <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              步骤2
-            </h5>
-            <p className="font-normal text-gray-700 dark:text-gray-400 max-w-prose">
-              Hi. 我们是代售小额HDO， 3000美金以下
-            </p>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-
-              交易方式：  使用USDT 到平台地址：
-
-            </p>
-            <p className="underline">0x3C4c444D98BDb92BC33666AA5FdA5a24E1171495
-
-            </p>
-          </Card>
-          <Card href="#" className="bg-gradient-to-l  rotate-12 items-end" >
-            <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              步骤3
-            </h5>
-            <p className="font-normal text-gray-700 dark:text-gray-400 max-w-prose">
-              Hi. 我们是代售小额HDO， 3000美金以下
-            </p>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-
-              交易方式：  使用USDT 到平台地址：
-
-            </p>
-            <p className="underline">0x3C4c444D98BDb92BC33666AA5FdA5a24E1171495
-
-            </p>
-          </Card>
-          <Card href="#" className="bg-gradient-to-r  rotate-6 items-end" >
-            <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              步骤4
-            </h5>
-            <p className="font-normal text-gray-700 dark:text-gray-400 max-w-prose">
-              Hi. 我们是代售小额HDO， 3000美金以下
-            </p>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-
-              交易方式：  使用USDT 到平台地址：
-
-            </p>
-            <p className="underline">0x3C4c444D98BDb92BC33666AA5FdA5a24E1171495
-
-            </p>
-          </Card>
+        <Textarea id="input" className="max-h-screen  auto-cols-max h-2/6"  placeholder="请输入你的内容..." onChange={handleSubmmit}/>
+      
+        <button className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={handleSubmit1}> 简体 - 繁体 </button>
+        <button className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={handleSubmit2}> 繁体 - 简体 </button>
+        <Textarea id="output" className="max-h-screen  auto-cols-max h-3/6"  placeholder="请等待..." value={outputValue} />
         </div>
-        <div className="text-8xl md-4 text-white  truncate text-center">
-
-          Welcome
         </div>
-        <div className="text-xl md-4 text-white  truncate text-center">
-
-          服务时间会比较长 不超过12小时， 完成一笔交易后会继续下一笔。
-
-        </div>
-        <div className="bg-gray-800 rounded-lg shadow m-4 dark:bg-gray-800 w-full h-48  static bottom-0">
-          <TableComponent />
-        </div>
-
 
       </MainLayout>
     </>

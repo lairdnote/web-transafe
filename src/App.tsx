@@ -1,7 +1,6 @@
 import React from 'react';
 import Welcome from './views/Welcome';
-import MainLayout from './components/MainLayout'
-import ReactDOM from "react-dom/client";
+import Policy from './views/Policy'
 import About from './views/About'
 import {
   createBrowserRouter,
@@ -15,8 +14,12 @@ const router = createBrowserRouter([
     element: <Welcome />,
   },
   {
-    path: "/buy",
+    path: "/about",
     element: <About />,
+  },
+  {
+    path: "/policy",
+    element: <Policy />,
   },
 ]);
 
